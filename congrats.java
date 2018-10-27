@@ -10,6 +10,7 @@ public class congrats extends AppCompatActivity {
     private Button button;
 
     @Override
+    //button which starts new game and save
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_congrats);
@@ -23,7 +24,7 @@ public class congrats extends AppCompatActivity {
 
 
     }
-
+    //Method starts the main activity ( the number game) screen
     public void openMain() {
         Intent intent = new Intent(this,MainActivity.class );
         startActivity(intent);

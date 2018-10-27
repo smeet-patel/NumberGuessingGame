@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     //    private ArrayList<HighScore> highScore = new ArrayList<HighScore>();// Stores the current games guess Low input
     public int totalScore;// Starting score starts at 100 and reduces per guess
     public int hintNum;
+    //initialing the fields and text
     TextView myscore;
     TextView myfeed;
     TextView hint;
@@ -28,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //allows multiple buttons
         ButtonHandler bh = new ButtonHandler();
         findViewById(R.id.guessNum).setOnClickListener(bh);
         findViewById(R.id.hintbnt).setOnClickListener(bh);
         findViewById(R.id.newgame).setOnClickListener(bh);
         findViewById(R.id.sb).setOnClickListener(bh);
 
+        //on create values and elements
         totalScore = 100;hintNum = 0;
         e = (EditText) findViewById(R.id.input);
         myfeed = (TextView) findViewById(R.id.Feedback);
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
+                //number is guessed
                 case R.id.guessNum:
                     totalScore=totalScore-10;
                     myscore.setText("Score: " + totalScore);
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     e.setText("");
                     break;
+                    //hint is pressed
                 case R.id.hintbnt:
                     int randLow = (int) (randomNumber - Math.random() * 6);
                     int randHi = (int) (Math.random() * 6 + randomNumber);
@@ -83,19 +88,11 @@ public class MainActivity extends AppCompatActivity {
                     myfeed.setText("Hint: bewteen " + randLow + " and " + randHi);
                     break;
                 case R.id.newgame:
+                    //call on method for new game
                     ng();
-//                    hintNum=0;
-//                    hint.setText("Hints used "+hintNum);
-//                    e.setText("");
-//                    totalScore=100;
-//                    myscore.setText("Score: " + totalScore);
-//                    yourNumbersHigh.clear();
-//                    high.setText("Your High Guesses " + yourNumbersHigh.toString());
-//                    yourNumbersLow.clear();
-//                    low.setText("Your Low Guesses " + yourNumbersLow.toString());
-//                    myfeed.setText("Enter Number from 1 to 100 above");
                     break;
                 case R.id.sb:
+                    //changes activity for now
                     openMain();
                     break;
                 default:
@@ -104,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //new game
     public void ng() {
         hintNum=0;
         hint.setText("Hints used "+hintNum);
@@ -117,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         myfeed.setText("Enter Number from 1 to 100 above");
     }
 
+    //saving the state of the game
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -128,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putIntegerArrayList("yourNumbersLow", yourNumbersLow );
     }
 
+    //reloading the state of the game
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
